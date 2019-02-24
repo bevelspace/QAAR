@@ -27,8 +27,18 @@ public class PlanSnap : MonoBehaviour {
     GameObject managedObject;
     BoxMaskMaterialAligner cropBox;
 
-	// Use this for initialization
-	void Start () {
+    public bool isSnappedOnEnabled;
+
+    private void OnEnable()
+    {
+        if (isSnappedOnEnabled)
+        {
+            StartAR();
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         PopulateManager();
 
         //add listener for to the spatial button (only works at runtime)

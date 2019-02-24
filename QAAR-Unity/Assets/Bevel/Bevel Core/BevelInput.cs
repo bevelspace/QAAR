@@ -30,6 +30,9 @@ namespace Bevel
         public static ClickObjectEvent clickButtonEvent;
         public static ClickObjectEvent clickButtonEventCropped;
 
+        public delegate void ClickHitEvent(RaycastHit clickHit);
+        public ClickHitEvent clickHitEvent;
+
         public static bool subscribedClick;
 
         public GameObject temporaryClickVis;
