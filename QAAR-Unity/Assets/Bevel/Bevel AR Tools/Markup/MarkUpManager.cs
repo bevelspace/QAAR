@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Bevel;
+using System;
 
 namespace Bevel
 {
     public class MarkUpManager : MonoBehaviour
     {
+        public GameObject markupPrefab;
+
 
         private BevelInput bevelInput;
+
+        private bool isWaitingForClick;
 
         // Use this for initialization
         void Start()
@@ -19,18 +24,45 @@ namespace Bevel
         // Update is called once per frame
         void Update()
         {
-
+            if (isWaitingForClick)
+            {
+                testAddClick();
+            }
         }
 
-        //Just to initialize the process. Turn on that listeners for that. 
-        public void StartMarkup()
+            //Just to initialize the process. Turn on that listeners for that. 
+            public void StartMarkup()
         {
-            bevelInput.clickHitEvent += AddMarkUp;
+            isWaitingForClick = true;
+        }
+
+        void testAddClick()
+        {
+            if (BevelInput.isSomethingClicked())
+            {
+                Ray clickRay = BevelInput.GetAnyClickRay();
+                RaycastHit hit;
+                if (Physics.Raycast(clickRay, out hit, 1000f, bevelInput.defaultClickLayers))
+                {
+                    AddMarkUp(hit);
+                }
+            }
+
         }
 
         //for adding new markup by spatial interface
         public void AddMarkUp(RaycastHit hit)
         {
+            GameObject markupObject = Instantiate(markupPrefab);
+            MarkUp markUp = markupObject.AddComponent<MarkUp>();
+
+            markupObject.transform.position = hit.point;
+            markupObject.transform.parent = transform;
+
+            markUp.title = hit.collider.gameObject.name + " markup";
+            markUp.markedObject = hit.collider.gameObject;
+            markUp.relativePosition = markupObject.transform.localPosition;
+            markUp.dateCreated = DateTime.Now;
 
         }
 
@@ -39,11 +71,6 @@ namespace Bevel
         {
 
         }
-
-    }
-
-    public class MarkUp
-    {
 
     }
 

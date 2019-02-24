@@ -165,6 +165,7 @@ namespace Bevel
             return null;
         }
 
+
         //for both mouse and ios, test for clicks
         public static GameObject TestClick(LayerMask layer){
             
@@ -187,42 +188,9 @@ namespace Bevel
             {
                 return null;
             }
-
-#region Old click test
-            ////test multitouch
-            //if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-            //{
-            //    Vector2 touchPosition = Input.GetTouch(0).position;
-            //    Vector3 touchPoint = new Vector3(touchPosition.x, touchPosition.y, 1f);
-            //    Ray touchRay = Camera.main.ScreenPointToRay(touchPoint);
-
-            //    if (Physics.Raycast(touchRay, out hit, 1000f, layer))
-            //    {
-            //        Debug.Log("found click on: " + hit.collider.gameObject.name);
-            //        return hit.collider.gameObject;
-            //    } else {
-            //        return null;
-            //    }
-            //}
-
-            ////test mouse click
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    Vector2 mousePosition = Input.mousePosition;
-            //    Vector3 mousePoint = new Vector3(mousePosition.x, mousePosition.y, 1f);
-            //    Ray mouseRay = Camera.main.ScreenPointToRay(mousePoint);
-
-            //    if (Physics.Raycast(mouseRay, out hit, 1000f, layer))
-            //    {
-            //        Debug.Log("found click for layer " + hit.collider.gameObject.name);
-            //        return hit.collider.gameObject;
-            //    } else{
-            //        return null;
-            //    }
-            //}
-            //return null;
-#endregion
         }
+
+
 
         //TODO: Might use this to aggregate controller tests. Might not be worth it. 
         //Maybe should just have one for each platform. But for now.
