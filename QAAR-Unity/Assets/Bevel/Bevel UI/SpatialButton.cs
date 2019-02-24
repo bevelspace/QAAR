@@ -23,7 +23,18 @@ public class SpatialButton : MonoBehaviour {
         BevelInput.clickButtonEventCropped += CallClickEvent;
     }
 
-    
+    public void TurnOnOtherButtons(GameObject newButton)
+    {
+        newButton.SetActive(true);
+    }
+    public void TurnOffButton(GameObject button)
+    {
+        button.SetActive(false);
+    }
+    public void TurnOffSelf()
+    {
+        gameObject.SetActive(false);
+    }
 
     //calls the calledOnClick unity event. To translate delegate subscription to unity event subscription. Now both are valid.
     //also bypasses the need to for local methods to take the gameObject argument. Because we know it's this one. 

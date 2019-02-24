@@ -44,6 +44,7 @@ namespace Bevel
                 RaycastHit hit;
                 if (Physics.Raycast(clickRay, out hit, 1000f, bevelInput.defaultClickLayers))
                 {
+                    isWaitingForClick = false;
                     AddMarkUp(hit);
                 }
             }
@@ -54,14 +55,14 @@ namespace Bevel
         public void AddMarkUp(RaycastHit hit)
         {
             GameObject markupObject = Instantiate(markupPrefab);
-            MarkUp markUp = markupObject.AddComponent<MarkUp>();
+            MarkUp markUp = GetComponent<MarkUp>();
 
             markupObject.transform.position = hit.point;
             markupObject.transform.parent = transform;
 
-            markUp.title = hit.collider.gameObject.name + " markup";
+            //markUp.title = hit.collider.gameObject.name + " markup";
             markUp.markedObject = hit.collider.gameObject;
-            markUp.relativePosition = markupObject.transform.localPosition;
+            markUp.relativePosition = markupObject.transform.position;
             markUp.dateCreated = DateTime.Now;
 
         }
