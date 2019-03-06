@@ -55,7 +55,7 @@ namespace Bevel
         public void AddMarkUp(RaycastHit hit)
         {
             GameObject markupObject = Instantiate(markupPrefab);
-            MarkUp markUp = GetComponent<MarkUp>();
+            MarkUp markUp = markupObject.GetComponent<MarkUp>();
 
             markupObject.transform.position = hit.point;
             markupObject.transform.parent = transform;
